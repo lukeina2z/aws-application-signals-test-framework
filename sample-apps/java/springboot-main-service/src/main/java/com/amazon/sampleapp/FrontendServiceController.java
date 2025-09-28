@@ -47,6 +47,7 @@ import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.GetBucketLocationRequest;
 import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.regions.providers.DefaultAwsRegionProviderChain;
 import software.amazon.awssdk.services.rds.RdsUtilities;
 import software.amazon.awssdk.services.rds.model.GenerateAuthenticationTokenRequest;
 
@@ -159,6 +160,7 @@ public class FrontendServiceController {
       // Generate IAM authentication token
       RdsUtilities rdsUtilities = RdsUtilities.builder()
               .credentialsProvider(DefaultCredentialsProvider.create())
+              .region(DefaultAwsRegionProviderChain.builder().build().getRegion())
               .build();
       
       String hostname = System.getenv("RDS_MYSQL_CLUSTER_ENDPOINT");

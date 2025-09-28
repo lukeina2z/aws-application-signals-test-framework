@@ -14,7 +14,7 @@ const string UserName = "user_foo_iam";
 
 try
 {
-    var pwd = Amazon.RDS.Util.RDSAuthTokenGenerator.GenerateAuthToken(RegionEndpoint.USEast1, ServerEndpoint, Port, UserName);
+    var pwd = Amazon.RDS.Util.RDSAuthTokenGenerator.GenerateAuthToken(RegionEndpoint.GetBySystemName(Environment.GetEnvironmentVariable("AWS_REGION") ?? "us-east-1"), ServerEndpoint, Port, UserName);
     Console.WriteLine("Auth token generated successfully");
 
     // Connection string for IAM authentication
