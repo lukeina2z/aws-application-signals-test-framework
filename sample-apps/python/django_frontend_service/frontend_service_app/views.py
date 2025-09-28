@@ -114,9 +114,8 @@ def mysql(request):
     logger.info("mysql received")
 
     try:
-        # Generate IAM authentication token using auto-detected region
-        session = boto3.Session()
-        region = session.region_name or 'us-east-1'
+        # Generate IAM authentication token with auto-detected region
+        region = os.environ.get('AWS_REGION') or os.environ.get('AWS_DEFAULT_REGION') or 'us-east-1'
         rds_client = boto3.client('rds', region_name=region)
         
         hostname = os.environ.get("RDS_MYSQL_CLUSTER_ENDPOINT")
