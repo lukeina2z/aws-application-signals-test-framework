@@ -113,17 +113,35 @@ def get_xray_trace_id():
 def mysql(request):
     logger.info("mysql received")
 
-    encoded_password = os.environ["RDS_MYSQL_CLUSTER_PASSWORD"]
-    decoded_password = base64.b64decode(encoded_password).decode('utf-8')
-
     try:
-        connection = pymysql.connect(host=os.environ["RDS_MYSQL_CLUSTER_ENDPOINT"],
-                                     user=os.environ["RDS_MYSQL_CLUSTER_USERNAME"],
-                                     password=decoded_password,
-                                     database=os.environ["RDS_MYSQL_CLUSTER_DATABASE"])
+        # Generate IAM authentication token
+        rds_client = boto3.client('rds', region_name='us-east-1')
+        
+        hostname = os.environ.get("RDS_MYSQL_CLUSTER_ENDPOINT")
+        username = os.environ.get("RDS_MYSQL_CLUSTER_USERNAME", "user_foo_iam")
+        database = os.environ.get("RDS_MYSQL_CLUSTER_DATABASE", "example_database")
+        
+        # Generate authentication token
+        auth_token = rds_client.generate_db_auth_token(
+            DBHostname=hostname,
+            Port=3306,
+            DBUsername=username
+        )
+        
+        # Connect using IAM authentication
+        connection = pymysql.connect(
+            host=hostname,
+            user=username,
+            password=auth_token,
+            database=database,
+            ssl={'ca': '/opt/rds-ca-2019-root.pem'},  # SSL required for IAM auth
+            ssl_disabled=False
+        )
+        
         with connection:
             with connection.cursor() as cursor:
                 cursor.execute("SELECT * FROM tables LIMIT 1;")
+                
     except Exception as e:  # pylint: disable=broad-except
         logger.error("Could not complete http request to RDS database:" + str(e))
     finally:
