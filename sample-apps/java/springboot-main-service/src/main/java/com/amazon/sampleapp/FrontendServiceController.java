@@ -159,7 +159,6 @@ public class FrontendServiceController {
       // Generate IAM authentication token
       RdsUtilities rdsUtilities = RdsUtilities.builder()
               .credentialsProvider(DefaultCredentialsProvider.create())
-              .region(Region.US_EAST_1)
               .build();
       
       String hostname = System.getenv("RDS_MYSQL_CLUSTER_ENDPOINT");

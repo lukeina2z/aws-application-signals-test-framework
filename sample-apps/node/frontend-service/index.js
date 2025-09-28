@@ -125,10 +125,9 @@ app.get('/mysql', async (req, res) => {
   try {
     // Generate IAM authentication token
     const signer = new Signer({
-      region: 'us-east-1',
       hostname: process.env.RDS_MYSQL_CLUSTER_ENDPOINT,
       port: 3306,
-      username: process.env.RDS_MYSQL_CLUSTER_USERNAME
+      username: process.env.RDS_MYSQL_CLUSTER_USERNAME || 'user_foo_iam'
     });
     const token = await signer.getAuthToken();
 
