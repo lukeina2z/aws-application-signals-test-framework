@@ -5,6 +5,42 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Java-SB-Main",
+            "request": "launch",
+            "mainClass": "",
+            "args": [],
+            "vmArgs": [
+                "-jar",
+                "${workspaceFolder}/sample-apps/java/springboot-main-service/build/libs/springboot-main-service-0.0.1-SNAPSHOT.jar"
+            ],
+            "env": {
+                "RDS_MYSQL_CLUSTER_ENDPOINT": "database-test-a1.c6rukuycoek2.us-east-1.rds.amazonaws.com",
+                "RDS_MYSQL_CLUSTER_DATABASE": "example_database",
+                "RDS_MYSQL_CLUSTER_USERNAME": "user_foo_iam"
+            },
+            "cwd": "${workspaceFolder}/sample-apps/java/springboot-main-service",
+            "console": "integratedTerminal"
+        },
+        {
+            "type": "java",
+            "name": "Java-SB-Remote",
+            "request": "launch",
+            "mainClass": "",
+            "args": [],
+            "vmArgs": [
+                "-jar",
+                "${workspaceFolder}/sample-apps/java/springboot-remote-service/build/libs/springboot-remote-service-0.0.1-SNAPSHOT.jar"
+            ],
+            "env": {
+                "RDS_MYSQL_CLUSTER_ENDPOINT": "database-test-a1.c6rukuycoek2.us-east-1.rds.amazonaws.com",
+                "RDS_MYSQL_CLUSTER_DATABASE": "example_database",
+                "RDS_MYSQL_CLUSTER_USERNAME": "user_foo_iam"
+            },
+            "cwd": "${workspaceFolder}/sample-apps/java/springboot-remote-service",
+            "console": "integratedTerminal"
+        },
+        {
             "name": "nodejs-frontend-svc",
             "request": "launch",
             "runtimeArgs": [
