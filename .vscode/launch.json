@@ -12,6 +12,12 @@
                 "start"
             ],
             "runtimeExecutable": "npm",
+            "linux": {
+                "runtimeExecutable": "~/.nvm/versions/node/v20.19.5/bin/npm",
+                "env": {
+                    "PATH": "/home/ec2-user/.nvm/versions/node/v20.19.5/bin:${env:PATH}"
+                }
+            },
             "cwd": "${workspaceFolder}/sample-apps/node/frontend-service",
             "skipFiles": [
                 "<node_internals>/**"
@@ -26,6 +32,12 @@
                 "start"
             ],
             "runtimeExecutable": "npm",
+            "linux": {
+                "runtimeExecutable": "~/.nvm/versions/node/v20.19.5/bin/npm",
+                "env": {
+                    "PATH": "/home/ec2-user/.nvm/versions/node/v20.19.5/bin:${env:PATH}"
+                }
+            },
             "cwd": "${workspaceFolder}/sample-apps/node/remote-service",
             "skipFiles": [
                 "<node_internals>/**"
