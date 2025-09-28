@@ -6,6 +6,8 @@ const mysql = require('mysql2');
 const bunyan = require('bunyan');
 const { S3Client, GetBucketLocationCommand } = require('@aws-sdk/client-s3');
 const { Signer } = require('@aws-sdk/rds-signer');
+const { loadConfig } = require('@aws-sdk/node-config-provider');
+const { NODE_REGION_CONFIG_OPTIONS, NODE_REGION_CONFIG_FILE_OPTIONS } = require('@aws-sdk/config-resolver');
 
 const PORT = parseInt(process.env.SAMPLE_APP_PORT || '8000', 10);
 
@@ -123,8 +125,12 @@ app.get('/client-call', (req, res) => {
 
 app.get('/mysql', async (req, res) => {
   try {
+    // Auto-detect region using AWS SDK's default region provider chain
+    const region = await loadConfig(NODE_REGION_CONFIG_OPTIONS, NODE_REGION_CONFIG_FILE_OPTIONS)();
+    
     // Generate IAM authentication token
     const signer = new Signer({
+      region: region,
       hostname: process.env.RDS_MYSQL_CLUSTER_ENDPOINT,
       port: 3306,
       username: process.env.RDS_MYSQL_CLUSTER_USERNAME || 'user_foo_iam'

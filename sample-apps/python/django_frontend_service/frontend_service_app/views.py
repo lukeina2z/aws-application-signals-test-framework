@@ -114,8 +114,10 @@ def mysql(request):
     logger.info("mysql received")
 
     try:
-        # Generate IAM authentication token
-        rds_client = boto3.client('rds')
+        # Generate IAM authentication token using auto-detected region
+        session = boto3.Session()
+        region = session.region_name or 'us-east-1'
+        rds_client = boto3.client('rds', region_name=region)
         
         hostname = os.environ.get("RDS_MYSQL_CLUSTER_ENDPOINT")
         username = os.environ.get("RDS_MYSQL_CLUSTER_USERNAME", "user_foo_iam")

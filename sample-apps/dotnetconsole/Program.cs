@@ -3,6 +3,7 @@ using System.Data;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 using Amazon;
+using Amazon.Runtime;
 
 
 Console.WriteLine("Hello, World!");
@@ -14,7 +15,9 @@ const string UserName = "user_foo_iam";
 
 try
 {
-    var pwd = Amazon.RDS.Util.RDSAuthTokenGenerator.GenerateAuthToken(RegionEndpoint.GetBySystemName(Environment.GetEnvironmentVariable("AWS_REGION") ?? "us-east-1"), ServerEndpoint, Port, UserName);
+    // Auto-detect region using AWS SDK's default region detection
+    var regionEndpoint = FallbackRegionFactory.GetRegionEndpoint() ?? RegionEndpoint.USEast1;
+    var pwd = Amazon.RDS.Util.RDSAuthTokenGenerator.GenerateAuthToken(regionEndpoint, ServerEndpoint, Port, UserName);
     Console.WriteLine("Auth token generated successfully");
 
     // Connection string for IAM authentication
