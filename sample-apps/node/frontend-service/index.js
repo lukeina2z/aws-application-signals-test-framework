@@ -5,7 +5,7 @@ const express = require('express');
 const mysql = require('mysql2');
 const bunyan = require('bunyan');
 const { S3Client, GetBucketLocationCommand } = require('@aws-sdk/client-s3');
-const { RDS } = require('@aws-sdk/client-rds');
+const { Signer } = require('@aws-sdk/rds-signer');
 
 const PORT = parseInt(process.env.SAMPLE_APP_PORT || '8000', 10);
 
@@ -124,12 +124,13 @@ app.get('/client-call', (req, res) => {
 app.get('/mysql', async (req, res) => {
   try {
     // Generate IAM authentication token
-    const rds = new RDS({ region: 'us-east-1' });
-    const token = await rds.getAuthToken({
+    const signer = new Signer({
+      region: 'us-east-1',
       hostname: process.env.RDS_MYSQL_CLUSTER_ENDPOINT,
       port: 3306,
       username: process.env.RDS_MYSQL_CLUSTER_USERNAME || 'user_foo_iam',
     });
+    const token = await signer.getAuthToken();
 
     // Create a connection to the MySQL database using IAM authentication
     const connection = mysql.createConnection({
