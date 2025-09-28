@@ -15,7 +15,10 @@
             "linux": {
                 "runtimeExecutable": "~/.nvm/versions/node/v20.19.5/bin/npm",
                 "env": {
-                    "PATH": "/home/ec2-user/.nvm/versions/node/v20.19.5/bin:${env:PATH}"
+                    "PATH": "/home/ec2-user/.nvm/versions/node/v20.19.5/bin:${env:PATH}",
+                    "RDS_MYSQL_CLUSTER_ENDPOINT": "database-test-a1.c6rukuycoek2.us-east-1.rds.amazonaws.com",
+                    "RDS_MYSQL_CLUSTER_DATABASE": "example_database",
+                    "RDS_MYSQL_CLUSTER_USERNAME": "user_foo_iam"
                 }
             },
             "cwd": "${workspaceFolder}/sample-apps/node/frontend-service",

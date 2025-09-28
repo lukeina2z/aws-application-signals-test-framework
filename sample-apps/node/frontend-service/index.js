@@ -128,16 +128,16 @@ app.get('/mysql', async (req, res) => {
       region: 'us-east-1',
       hostname: process.env.RDS_MYSQL_CLUSTER_ENDPOINT,
       port: 3306,
-      username: process.env.RDS_MYSQL_CLUSTER_USERNAME || 'user_foo_iam',
+      username: process.env.RDS_MYSQL_CLUSTER_USERNAME
     });
     const token = await signer.getAuthToken();
 
     // Create a connection to the MySQL database using IAM authentication
     const connection = mysql.createConnection({
       host: process.env.RDS_MYSQL_CLUSTER_ENDPOINT,
-      user: process.env.RDS_MYSQL_CLUSTER_USERNAME || 'user_foo_iam',
+      user: process.env.RDS_MYSQL_CLUSTER_USERNAME,
       password: token,
-      database: process.env.RDS_MYSQL_CLUSTER_DATABASE || 'example_database',
+      database: process.env.RDS_MYSQL_CLUSTER_DATABASE,
       ssl: 'Amazon RDS',
       authPlugins: {
         mysql_clear_password: () => () => Buffer.from(token + '\0')
