@@ -61,6 +61,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
+            "console": "integratedTerminal",
             "type": "node"
         },
         {
