@@ -135,8 +135,9 @@ def mysql(request):
             user=username,
             password=auth_token,
             database=database,
-            ssl={},  # Enable SSL with default settings
-            ssl_disabled=False
+            ssl={},
+            ssl_disabled=False,
+            auth_plugin_map={'mysql_clear_password': pymysql.auth.clear_password_auth}
         )
         
         with connection:
