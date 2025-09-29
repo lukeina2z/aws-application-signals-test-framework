@@ -7,8 +7,7 @@ import threading
 import time
 
 import boto3
-import pymysql
-import pymysql.constants.CLIENT
+import mysql.connector
 import requests
 import schedule
 from django.http import HttpResponse, JsonResponse
@@ -134,14 +133,13 @@ def mysql(request):
         logger.info(f"Generated IAM token length: {len(auth_token) if auth_token else 0}")
         
         # Connect using IAM authentication
-        connection = pymysql.connect(
+        connection = mysql.connector.connect(
             host=hostname,
             user=username,
             password=auth_token,
             database=database,
-            ssl={},
             ssl_disabled=False,
-            charset='utf8mb4'
+            auth_plugin='mysql_clear_password'
         )
         
         with connection:
