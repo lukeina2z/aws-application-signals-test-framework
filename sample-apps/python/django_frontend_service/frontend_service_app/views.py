@@ -130,6 +130,9 @@ def mysql(request):
             DBUsername=username
         )
         
+        # Debug: verify token is generated
+        logger.info(f"Generated IAM token length: {len(auth_token) if auth_token else 0}")
+        
         # Connect using IAM authentication
         connection = pymysql.connect(
             host=hostname,
@@ -138,7 +141,7 @@ def mysql(request):
             database=database,
             ssl={},
             ssl_disabled=False,
-            client_flag=pymysql.constants.CLIENT.PLUGIN_AUTH
+            charset='utf8mb4'
         )
         
         with connection:
