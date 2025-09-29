@@ -145,6 +145,8 @@ def mysql(request):
         with connection:
             with connection.cursor() as cursor:
                 cursor.execute("SELECT * FROM tables LIMIT 1;")
+                results = cursor.fetchall()
+                logger.info(f"Query executed successfully, rows: {len(results)}")
                 
     except Exception as e:  # pylint: disable=broad-except
         logger.error("Could not complete http request to RDS database:" + str(e))
