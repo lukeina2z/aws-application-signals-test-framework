@@ -135,7 +135,7 @@ def mysql(request):
             user=username,
             password=auth_token,
             database=database,
-            ssl={'ca': '/opt/rds-ca-2019-root.pem'},  # SSL required for IAM auth
+            ssl={},  # Enable SSL with default settings
             ssl_disabled=False
         )
         
