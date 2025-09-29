@@ -8,6 +8,7 @@ import time
 
 import boto3
 import pymysql
+import pymysql.constants.CLIENT
 import requests
 import schedule
 from django.http import HttpResponse, JsonResponse
@@ -137,7 +138,7 @@ def mysql(request):
             database=database,
             ssl={},
             ssl_disabled=False,
-            auth_plugin_map={'mysql_clear_password': pymysql.auth.clear_password_auth}
+            client_flag=pymysql.constants.CLIENT.PLUGIN_AUTH
         )
         
         with connection:
