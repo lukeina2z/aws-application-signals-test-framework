@@ -11,3 +11,10 @@ node_modules/
 
 # Ignore Bin files from validator folder
 validator/bin
+
+
+__pycache__/
+vAdot12/
+vAdot999/
+v-no-adot/
+aws-application-signals-test-framework-lk-main.sln

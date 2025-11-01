@@ -96,3 +96,20 @@ application {
 tasks.named<Test>("test") {
   useJUnitPlatform()
 }
+
+// Copy runtime dependencies into build/libs so a classpath wildcard (build/libs/*) will pick them up
+tasks.register<Copy>("copyRuntimeLibs") {
+  from(configurations.named("runtimeClasspath"))
+  into(layout.buildDirectory.dir("libs"))
+  duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+// Ensure the copy task runs after assemble so jars are present
+tasks.named("assemble") {
+  dependsOn("copyRuntimeLibs")
+}
+
+// Make startScripts depend on copyRuntimeLibs to avoid implicit dependency warnings
+tasks.named("startScripts") {
+  dependsOn("copyRuntimeLibs")
+}

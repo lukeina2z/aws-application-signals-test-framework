@@ -1,0 +1,89 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Java-Validator",
+            "request": "launch",
+            "mainClass": "com.amazon.aoc.App",
+            "args": [
+                "-c",
+                "python/ec2/default/trace-validation.yml",
+                "--testing-id",
+                "18999275875-1646-32327",
+                "--endpoint",
+                "http://localhost:8000",
+                "--remote-service-deployment-name",
+                "\"172.31.21.120\":8001",
+                "--region",
+                "us-east-1",
+                "--account-id",
+                "***",
+                "--metric-namespace",
+                "ApplicationSignals",
+                "--log-group",
+                "/aws/application-signals/data",
+                "--service-name",
+                "python-sample-application-18999275875-1646-32327",
+                "--remote-service-name",
+                "python-sample-remote-application-18999275875-1646-32327",
+                "--query-string",
+                "ip=\"172.31.21.120\"&testingId=18999275875-1646-32327",
+                "--instance-ami",
+                "ami-00612593475c8932c",
+                "--instance-id",
+                "i-0ef38d044780bbdb1",
+                "--rollup"
+            ],
+            "env": {
+                "OTEL_RESOURCE_ATTRIBUTES": "service.name=ADOT-Java-EC2",
+            },
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            // "preLaunchTask": "Build with Gradle",
+            "projectName": "",
+            "modulePaths": [],
+            "classPaths": [
+                "${workspaceFolder}/validator/build/classes/java/main",
+                "${workspaceFolder}/validator/build/resources/main",
+                "${workspaceFolder}/validator/build/libs/*"
+            ],
+        },
+        {
+            "type": "java",
+            "name": "OTel-Java",
+            "request": "launch",
+            "mainClass": "org.example.App",
+            "env": {
+                "OTEL_RESOURCE_ATTRIBUTES": "service.name=OTel-Java-EC2",
+                "JAVA_TOOL_OPTIONS": " -javaagent:/Users/lukezha/github/otel-java/wk-adot-pr/adot-java-pr-contrib-patch/otelagent/build/libs/aws-opentelemetry-agent-2.11.0-SNAPSHOT.jar",
+                // "AWS_LAMBDA_FUNCTION_NAME": "Great-Lambda-Fn-XXX",
+                "OTEL_JAVAAGENT_DEBUG": "true",
+                "OTEL_LOG_LEVEL": "debug",
+                "OTEL_METRICS_EXPORTER": "none",
+                // "OTEL_LOGS_EXPORTER": "none",
+                "OTEL_EXPORTER_OTLP_ENDPOINT": "http://localhost:4318",
+                "OTEL_EXPORTER_OTLP_TRACES_ENDPOINT": "http://localhost:4318/v1/traces",
+                // "OTEL_EXPORTER_OTLP_TRACES_ENDPOINT": "http://localhost:4316/v1/traces",
+                // "OTEL_METRIC_EXPORT_INTERVAL": "2000",
+                // "OTEL_EXPORTER_OTLP_PROTOCOL": "http/json",
+                "OTEL_EXPORTER_OTLP_PROTOCOL": "http/protobuf",
+                "OTEL_TRACES_SAMPLER": "always_on",
+                "OTEL_TRACES_SAMPLER_ARG": "endpoint=http://localhost:2000",
+                "OTEL_AWS_APPLICATION_SIGNALS_ENABLED": "true",
+                // "OTEL_AWS_APPLICATION_SIGNALS_EXPORTER_ENDPOINT": "http://localhost:4316/v1/metrics",
+            },
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            // "preLaunchTask": "Build with Gradle",
+            "projectName": "",
+            "modulePaths": [],
+            "classPaths": [
+                "${workspaceFolder}/app/build/libs/app-all.jar"
+            ]
+        }
+    ]
+}
