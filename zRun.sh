@@ -49,7 +49,7 @@
 # source ./vAdot999/bin/activate
 # pip install --upgrade pip setuptools wheel
 # pip list
-# pip install /Users/lukezha/github/otel-python/adot-python-pr-to3.17/aws-otel-python-instrumentation/dist/aws_opentelemetry_distro-0.999.0.dev0-py3-none-any.whl
+# pip install /Users/lukezha/github/otel-python/adot-python-pr-to3.17/aws-otel-python-instrumentation/dist/aws_opentelemetry_distro-0.13.0.dev0-py3-none-any.whl
 # pip list
 
 
@@ -69,7 +69,7 @@
 #       export OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=127.0.0.1:4317
 #       export OTEL_EXPORTER_OTLP_METRICS_INSECURE=true
 #       export OTEL_TRACES_SAMPLER=always_on
-#       export OTEL_RESOURCE_ATTRIBUTES="service.name=python-sample-application-lk999,deployment.environment.name=ec2:default"
+#       export OTEL_RESOURCE_ATTRIBUTES="service.name=python-sample-application-lk13,deployment.environment.name=ec2:default"
 #       export AWS_REGION='us-east-1'
 #       python manage.py migrate
 #       opentelemetry-instrument python manage.py runserver 0.0.0.0:8000 --noreload
