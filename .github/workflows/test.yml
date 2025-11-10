@@ -13,7 +13,7 @@ permissions:
   contents: read
 jobs:
   llkk-python-ec2-default:
-    uses: ./.github/workflows/luke-test-python-ec2-default-test.yml
+    uses: ./.github/workflows/java-sample-app-ecr-deploy-lukezha.yml
     secrets: inherit
     with:
       caller-workflow-name: 'test'
