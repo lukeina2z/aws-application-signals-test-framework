@@ -53,7 +53,7 @@ dependencies {
 
 jib {
   from {
-    image = "eclipse-temurin:$javaVersion-jdk"
+    image = "openjdk:$javaVersion-jdk"
   }
   // Replace this value with the ECR Image URI
   to {
