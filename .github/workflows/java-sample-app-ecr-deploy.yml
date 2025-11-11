@@ -20,6 +20,8 @@ env:
   AWS_ACCESS_KEY_ID: ${{ secrets.LK_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.LK_KEY_VALUE }}
   # E2E_TEST_ROLE_NAME: ${{ secrets.APPLICATION_SIGNALS_E2E_TEST_ROLE_NAME }}
+  ACTIONS_STEP_DEBUG: true
+  ACTIONS_RUNNER_DEBUG: true
 
 jobs:
   # java-v11-main:
