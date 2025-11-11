@@ -33,4 +33,4 @@ jobs:
       aws-region: ${{ matrix.aws-region }}
       test-cluster-name: 'e2e-java-otlp-ocb-canary-test'
       caller-workflow-name: 'appsignals-java-e2e-eks-otlp-ocb-canary-test'
-      java-version: '11'
+      java-version: '21'
