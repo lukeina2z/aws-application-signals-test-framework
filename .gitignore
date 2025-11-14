@@ -14,3 +14,5 @@ validator/bin
 
 .venv/
 __pycache__/
+
+aws-application-signals-test-framework-test-fork.sln
